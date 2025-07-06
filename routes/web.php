@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Category;
+
 Route::get('/', function () {
-    return view('welcome');
+    $categories = Category::all();
+
+    return view('welcome', compact('categories'));
 });
