@@ -5,7 +5,7 @@ use App\Models\Category;
 use App\Models\Product;
 
 Route::get('/', function () {
-    return view('welcome'); // твоя головна сторінка
+    return view('index'); // твоя головна сторінка
 })->name('home');
 
 Route::get('/categories', function () {
@@ -15,7 +15,7 @@ Route::get('/categories', function () {
 
 
 Route::get('/products', function () {
-    $products = Product::all();
+    $products = Product::with('description')->get();
 
     return view('products', compact('products'));
 })->name('home');

@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Products</title>
-</head>
+@section('title', __('messages.products'))
 
-<body>
-    <h1>Всі продукти</h1>
+@section('content')
+<h1>{{ __('messages.products') }}</h1>
 
-    <ul>
-        @foreach($products as $product)
-        <li>
-            <strong>{{ $product->slug }}</strong><br>
-            Ціна: {{ $product->price }}<br>
-            <img src="{{ asset($product->img) }}" alt="{{ $product->slug }}" width="100">
-
-            <h3>{{ $product->category_id }}</h3>
-        </li>
-        @endforeach
-    </ul>
-</body>
-
-</html>
+<ul>
+    @foreach($products as $product)
+    <li>
+        <strong>{{ $product->description?->title ?? $product->slug }}</strong><br>
+        {{ __('messages.price') }}: {{ $product->price }}<br>
+        <img src="{{ asset($product->img) }}" alt="{{ $product->slug }}" width="100">
+        <p>{{ $product->description?->exerpt }}</p>
+    </li>
+    @endforeach
+</ul>
+@endsection
