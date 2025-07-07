@@ -15,10 +15,13 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
     <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
+        
         @if (Route::has('login'))
         <nav class="flex items-center justify-end gap-4">
             @auth
@@ -49,12 +52,11 @@
 
 
 
-        <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
-            <ul class="text-white">
-                @foreach($categories as $category)
-                <li>{{ $category->slug }}</li>
-                @endforeach
-            </ul>
+        <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row text-white">
+            <x-lang-switcher />
+        
+        
+        INDEX
         </main>
     </div>
 
