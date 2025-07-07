@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(
             [
+                LanguageSeeder::class,
                 CategorySeeder::class,
                 CategoryDescriptionSeeder::class,
             ]
