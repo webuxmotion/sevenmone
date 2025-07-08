@@ -5,7 +5,11 @@ use App\Models\Category;
 use App\Models\Product;
 
 Route::get('/', function () {
-    return view('index'); // твоя головна сторінка
+    $hits = Product::with('description')
+        ->where('hit', '=', 1)
+        ->get();
+
+    return view('index', compact('hits')); // твоя головна сторінка
 })->name('home');
 
 Route::get('/categories', function () {
