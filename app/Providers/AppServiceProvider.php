@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,10 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        app()->macro('getLocaleId', function () {
-            return DB::table('languages')
-                ->where('code', app()->getLocale())
-                ->value('id');
-        });
+        if (Schema::hasTable('languages')) {
+            app()->macro('getLocaleId', function () {
+                return DB::table('languages')
+                    ->where('code', app()->getLocale())
+                    ->value('id');
+            });
+        }
     }
 }
