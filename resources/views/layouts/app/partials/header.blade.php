@@ -102,35 +102,8 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ localized_url('products') }}">{{ __('menu.products') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="category.html">{{ __('menu.computers') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="category.html">{{ __('menu.tablets') }}</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ __('menu.laptops') }}
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="category.html">{{ __('menu.mac') }}</a></li>
-                                    <li><a class="dropdown-item" href="category.html">{{ __('menu.windows') }}</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="category.html">{{ __('menu.phones') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="category.html">{{ __('menu.cameras') }}</a>
-                            </li>
-                        </ul>
-                    </div>
+                    
+                    <x-menu />
 
                 </div>
             </nav>

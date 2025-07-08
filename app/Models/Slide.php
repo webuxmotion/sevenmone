@@ -9,11 +9,7 @@ class Slide extends Model
 {
     public function description()
     {
-        $languageId = DB::table('languages')
-            ->where('code', app()->getLocale())
-            ->value('id');
-
         return $this->hasOne(SlideDescription::class)
-            ->where('language_id', $languageId);
+            ->where('language_id', app()->getLocaleId());
     }
 }

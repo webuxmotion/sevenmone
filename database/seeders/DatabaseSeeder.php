@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             [
                 LanguageSeeder::class,
                 CategorySeeder::class,
-                CategoryDescriptionSeeder::class,
                 ProductSeeder::class,
                 ProductDescriptionSeeder::class,
                 SlideSeeder::class,
