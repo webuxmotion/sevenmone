@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Product;
@@ -23,3 +24,5 @@ Route::get('/products', function () {
 
     return view('products', compact('products'));
 })->name('home');
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
