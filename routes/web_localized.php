@@ -25,4 +25,5 @@ Route::get('/products', function () {
     return view('products', compact('products'));
 })->name('home');
 
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/modal', [CartController::class, 'modal'])->name('cart.modal');

@@ -20,4 +20,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     });
+
+    document.querySelector('.js-show-modal').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        axios.get(localized_url('/cart/modal'))
+            .then(response => {
+                document.querySelector('.js-modal-body').innerHTML = response.data;
+            })
+            .catch(error => {
+                console.error('Error adding to cart:', error);
+                alert('failed');
+            });
+    })
 });

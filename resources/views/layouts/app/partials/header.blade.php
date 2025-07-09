@@ -17,62 +17,12 @@
                     </form>
                     <a href="#" class="open-search"><i class="fas fa-search"></i></a>
 
-                    <a href="#" class="relative" data-bs-toggle="modal" data-bs-target="#cart-modal">
+                    <a href="#" class="relative js-show-modal" data-bs-toggle="modal" data-bs-target="#cart-modal">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="badge bg-danger rounded-pill count-items">0</span>
                     </a>
-                    <div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table text-start">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Image</th>
-                                                <th scope="col">Product</th>
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="#"><img src="/img/products/apple_cinema_30.jpg" alt=""></a>
-                                                </td>
-                                                <td><a href="#">Apple cinema</a></td>
-                                                <td>1</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="#"><img src="/img/products/canon_eos_5d_1.jpg" alt=""></a>
-                                                </td>
-                                                <td><a href="#">Canon EOS</a></td>
-                                                <td>1</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="#"><img src="/img/products/hp_1.jpg" alt=""></a>
-                                                </td>
-                                                <td><a href="#">HP</a></td>
-                                                <td>1</td>
-                                                <td>100</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger ripple" data-bs-dismiss="modal">Continue Shopping</button>
-                                    <button type="button" class="btn btn-primary">Checkout</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    @include('layouts.app.partials.cart_modal')
 
                     <a href="#"><i class="far fa-heart"></i></a>
 

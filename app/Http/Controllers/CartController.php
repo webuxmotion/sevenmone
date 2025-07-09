@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        return view('cart.index');
+    }
+
     public function add(Request $request)
     {
         $request->validate([
@@ -27,5 +33,16 @@ class CartController extends Controller
             'message' => __('cart.added'),
             'cart' => session('cart'),
         ]);
+    }
+
+    public function modal(Request $request)
+    {
+        if (!$request->ajax()) {
+            abort(403); // або 404, якщо хочеш приховати маршрут
+        }
+
+        $cart = Cart::get();
+
+        return view('layouts.app.partials.cart_modal_content', compact('cart'));
     }
 }

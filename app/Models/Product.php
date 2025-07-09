@@ -17,26 +17,33 @@ class Product extends Model
     public static function addToCart($product, $quantity = 1)
     {
         $quantity = max(1, (int) $quantity);
-        $cart = session()->get('cart', []);
 
-        // Якщо товар існує, але його значення не масив — перезаписуємо
-        if (!isset($cart[$product->id]) || !is_array($cart[$product->id])) {
-            $cart[$product->id] = [
-                'quantity' => 0,
+        $cart = session()->get('cart', [
+            'items' => [],
+            'quantity' => 0,
+            'sum' => 0,
+        ]);
+
+        $id = $product->id;
+
+        // Якщо товар вже є — оновлюємо кількість
+        if (isset($cart['items'][$id])) {
+            $cart['items'][$id]['quantity'] += $quantity;
+        } else {
+            // Додаємо новий товар
+            $cart['items'][$id] = [
                 'title' => $product->description->title ?? 'Unknown',
-                'price' => $product->price,
+                'price' => (float) $product->price,
                 'img' => $product->img,
+                'quantity' => $quantity,
             ];
         }
 
-        // Додаємо кількість
-        $cart[$product->id]['quantity'] += $quantity;
-
-        // Оновлення загальної кількості
-        $cart['quantity'] = array_sum(array_map(fn($item) => is_array($item) ? $item['quantity'] : 0, $cart));
-
-        // Оновлення суми
-        $cart['sum'] = array_sum(array_map(fn($item) => is_array($item) ? $item['quantity'] * $item['price'] : 0, $cart));
+        // Перерахунок загальної кількості і суми
+        $cart['quantity'] = array_sum(array_column($cart['items'], 'quantity'));
+        $cart['sum'] = array_sum(array_map(function ($item) {
+            return $item['price'] * $item['quantity'];
+        }, $cart['items']));
 
         session()->put('cart', $cart);
     }

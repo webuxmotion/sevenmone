@@ -38,18 +38,17 @@ class LangSwitcher extends Component
     {
         $currentUri = request()->path(); // Поточний URI, наприклад 'en/products' або 'products'
 
-        // Масив мов, які мають префікс у URI (всі крім базової)
-        $languagesWithPrefix = DB::table('languages')
-            ->where('base', 0)
+        // Отримуємо всі мовні коди (включно з базовою)
+        $allLangCodes = DB::table('languages')
             ->pluck('code')
             ->toArray();
 
-        // Прибираємо будь-який мовний префікс (тільки для мов з префіксом)
-        foreach ($languagesWithPrefix as $lang) {
-            if (str_starts_with($currentUri, $lang . '/')) {
-                $currentUri = substr($currentUri, strlen($lang) + 1);
+        // Видаляємо мовний префікс, якщо він є на початку
+        foreach ($allLangCodes as $langCode) {
+            if (str_starts_with($currentUri, $langCode . '/')) {
+                $currentUri = substr($currentUri, strlen($langCode) + 1);
                 break;
-            } elseif ($currentUri === $lang) {
+            } elseif ($currentUri === $langCode) {
                 $currentUri = '';
                 break;
             }
@@ -60,7 +59,7 @@ class LangSwitcher extends Component
             return url($currentUri);
         }
 
-        // Інакше додаємо префікс мови, якщо його немає
+        // Інакше додаємо префікс мови
         return url($locale . ($currentUri ? '/' . $currentUri : ''));
     }
 
