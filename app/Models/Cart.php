@@ -63,4 +63,13 @@ class Cart
             'sum' => $totalSum,
         ];
     }
+
+    public static function clear() 
+    {
+        session()->put('cart', [
+            'items' => [],
+            'quantity' => 0,
+            'sum' => 0,
+        ]);
+    }
 }

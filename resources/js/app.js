@@ -37,6 +37,32 @@ window.deleteCartItem = function(id) {
         });
 };
 
+window.clearCart = function() {
+    axios.post(localized_url(`/cart/clear`))
+        .then(response => {
+            toastr.clear();
+            
+            toastr.success(response.data?.message || 'Cart cleared');
+            document.querySelector('.js-count-items').innerHTML = 0;
+
+            const clearBtn = document.querySelector('.js-clear-cart-button');
+            if (clearBtn) clearBtn.remove();
+
+            return axios.get(localized_url('/cart/modal'));
+        })
+        .then(response => {
+            document.querySelector('.js-modal-body').innerHTML = response.data;
+        })
+        .catch(error => {
+            toastr.clear();    
+            toastr.error('Failed to delete item');
+            console.error(error);
+        })
+        .finally(() => {
+            hideLoader();
+        });
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
 

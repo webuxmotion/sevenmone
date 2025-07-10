@@ -12,4 +12,6 @@ return [
     'checkout' => 'Zur Kasse',
     'cart' => 'Warenkorb',
     'empty' => 'Ihr Warenkorb ist leer',
+    'clear_cart' => 'Warenkorb leeren',
+    'cleared' => 'Der Warenkorb wurde geleert',
 ];

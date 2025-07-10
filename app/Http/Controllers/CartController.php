@@ -52,6 +52,17 @@ class CartController extends Controller
         ]);
     }
 
+    public static function clear()
+    {
+        Cart::clear();
+
+        return response()->json([
+            'success' => true,
+            'message' => __('cart.cleared'), 
+            'cart' => session('cart'),
+        ]);
+    }
+
     public function modal(Request $request)
     {
         if (!$request->ajax()) {

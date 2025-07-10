@@ -12,4 +12,6 @@ return [
     'checkout' => 'Checkout',
     'cart' => 'Cart',
     'empty' => 'Your cart is empty',
+    'clear_cart' => 'Clear cart',
+    'cleared' => 'Cart has been cleared',
 ];

@@ -11,6 +11,14 @@
             </div>
 
             <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-danger ripple js-clear-cart-button"
+                    onclick="clearCart()"
+                >
+                    {{ __('cart.clear_cart') }}
+                </button>
+
                 <button type="button" class="btn btn-danger ripple" data-bs-dismiss="modal">
                     {{ __('cart.continue_shopping') }}
                 </button>

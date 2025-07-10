@@ -12,4 +12,6 @@ return [
     'checkout' => 'Do kasy',
     'cart' => 'Koszyk',
     'empty' => 'Twój koszyk jest pusty',
+    'clear_cart' => 'Opróżnij koszyk',
+    'cleared' => 'Koszyk został opróżniony',
 ];
