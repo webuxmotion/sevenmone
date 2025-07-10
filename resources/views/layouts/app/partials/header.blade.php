@@ -19,7 +19,9 @@
 
                     <a href="#" class="relative js-show-modal" data-bs-toggle="modal" data-bs-target="#cart-modal">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="badge bg-danger rounded-pill count-items">0</span>
+                        <span class="badge bg-danger rounded-pill count-items js-count-items">
+                            {{ $cartCount }}
+                        </span>
                     </a>
                     
                     @include('layouts.app.partials.cart_modal')

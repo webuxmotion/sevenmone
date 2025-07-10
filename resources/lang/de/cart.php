@@ -11,4 +11,5 @@ return [
     'continue_shopping' => 'Weiter einkaufen',
     'checkout' => 'Zur Kasse',
     'cart' => 'Warenkorb',
+    'empty' => 'Ihr Warenkorb ist leer',
 ];

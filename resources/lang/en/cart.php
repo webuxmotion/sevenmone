@@ -11,4 +11,5 @@ return [
     'continue_shopping' => 'Continue shopping',
     'checkout' => 'Checkout',
     'cart' => 'Cart',
+    'empty' => 'Your cart is empty',
 ];

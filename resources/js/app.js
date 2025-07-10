@@ -20,9 +20,8 @@ window.deleteCartItem = function(id) {
         .then(response => {
             toastr.clear();
             toastr.success(response.data?.message || 'Item deleted');
-            // Optional: remove row from table
+            document.querySelector('.js-count-items').innerHTML = response.data?.cart?.quantity;
 
-            // Update modal content after delete
             return axios.get(localized_url('/cart/modal'));
         })
         .then(response => {
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             axios.post(localized_url('/cart/add'), { id: productId, quantity: 1 })
                 .then(response => {
                     // ✅ Successfully added
-                    console.log('Added to cart:', response.data);
+                    document.querySelector('.js-count-items').innerHTML = response.data?.cart?.quantity;
                     toastr.clear();
                     toastr.success(response.data?.message);
                 })
