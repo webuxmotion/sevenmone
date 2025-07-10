@@ -48,6 +48,31 @@ class Product extends Model
         session()->put('cart', $cart);
     }
 
+    public static function deleteFromCart(Product $product)
+    {
+        $cart = session()->get('cart', [
+            'items' => [],
+            'quantity' => 0,
+            'sum' => 0,
+        ]);
+
+        $id = $product->id;
+
+        // Remove item if it exists
+        if (isset($cart['items'][$id])) {
+            unset($cart['items'][$id]);
+        }
+
+        // Recalculate quantity and sum
+        $cart['quantity'] = array_sum(array_column($cart['items'], 'quantity'));
+        $cart['sum'] = array_sum(array_map(function ($item) {
+            return $item['price'] * $item['quantity'];
+        }, $cart['items']));
+
+        session()->put('cart', $cart);
+    }
+
+
     public function description()
     {
         return $this->hasOne(ProductDescription::class, 'product_id')

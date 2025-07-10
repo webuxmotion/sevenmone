@@ -19,6 +19,7 @@ if (Schema::hasTable('languages')) {
                 require __DIR__ . '/web_localized.php';
 
                 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+                Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
             });
 
         // The routes for base language can also work without lang code in url

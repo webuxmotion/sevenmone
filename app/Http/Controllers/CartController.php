@@ -35,6 +35,23 @@ class CartController extends Controller
         ]);
     }
 
+    public function delete($id)
+    {
+        $product = Product::getById($id);
+
+        if (!$product) {
+            return response()->json(['success' => false, 'message' => 'Product not found'], 404);
+        }
+
+        Product::deleteFromCart($product);
+
+        return response()->json([
+            'success' => true,
+            'message' => __('cart.removed'),
+            'cart' => session('cart'),
+        ]);
+    }
+
     public function modal(Request $request)
     {
         if (!$request->ajax()) {

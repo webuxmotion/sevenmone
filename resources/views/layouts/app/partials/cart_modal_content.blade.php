@@ -5,6 +5,7 @@
             <th scope="col">Product</th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -16,9 +17,17 @@
             <td><a href="{{ localized_url('/products/' . $item['slug']); }}">{{ $item['title'] }}</a></td>
             <td>{{ $item['quantity'] }}</td>
             <td>{{ number_format($item['price'], 2) }} ₴</td>
+            <td>
+                <button 
+                    onclick="deleteCartItem('{{ $item['id']; }}')" 
+                    class="btn-trash"
+                >
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
         </tr>
         @empty
-        <tr><td colspan="4">Кошик порожній</td></tr>
+            <tr><td colspan="5">Кошик порожній</td></tr>
         @endforelse
     </tbody>
 

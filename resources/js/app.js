@@ -1,7 +1,46 @@
 import './bootstrap';
 import { localized_url } from './utils';
 
+toastr.options = {
+    "positionClass": "toast-top-center", 
+};
+
+window.showLoader = function () {
+    document.querySelector('.js-global-loader')?.style.setProperty('display', 'flex');
+};
+
+window.hideLoader = function () {
+    document.querySelector('.js-global-loader')?.style.setProperty('display', 'none');
+};
+
+window.deleteCartItem = function(id) {
+    showLoader();
+
+    axios.post(localized_url(`/cart/delete/${id}`))
+        .then(response => {
+            toastr.clear();
+            toastr.success(response.data?.message || 'Item deleted');
+            // Optional: remove row from table
+
+            // Update modal content after delete
+            return axios.get(localized_url('/cart/modal'));
+        })
+        .then(response => {
+            document.querySelector('.js-modal-body').innerHTML = response.data;
+        })
+        .catch(error => {
+            toastr.clear();    
+            toastr.error('Failed to delete item');
+            console.error(error);
+        })
+        .finally(() => {
+            hideLoader();
+        });
+};
+
+
 document.addEventListener('DOMContentLoaded', function () {
+
     document.querySelectorAll('.js-add-to-cart').forEach(button => {
         button.addEventListener('click', function (e) {
             e.preventDefault();
@@ -12,7 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => {
                     // ✅ Successfully added
                     console.log('Added to cart:', response.data);
-                    alert(response.data?.message);
+                    toastr.clear();
+                    toastr.success(response.data?.message);
                 })
                 .catch(error => {
                     console.error('Error adding to cart:', error);
@@ -32,5 +72,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error adding to cart:', error);
                 alert('failed');
             });
-    })
+    });
 });
