@@ -22,6 +22,10 @@ window.deleteCartItem = function(id) {
             toastr.success(response.data?.message || 'Item deleted');
             document.querySelector('.js-count-items').innerHTML = response.data?.cart?.quantity;
 
+            if (response.data?.cart?.quantity === 0) {
+                document.querySelector('.js-clear-cart-button')?.classList.add('d-none');
+            }
+
             return axios.get(localized_url('/cart/modal'));
         })
         .then(response => {
@@ -45,8 +49,7 @@ window.clearCart = function() {
             toastr.success(response.data?.message || 'Cart cleared');
             document.querySelector('.js-count-items').innerHTML = 0;
 
-            const clearBtn = document.querySelector('.js-clear-cart-button');
-            if (clearBtn) clearBtn.remove();
+            document.querySelector('.js-clear-cart-button')?.classList.add('d-none');
 
             return axios.get(localized_url('/cart/modal'));
         })
@@ -74,8 +77,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             axios.post(localized_url('/cart/add'), { id: productId, quantity: 1 })
                 .then(response => {
-                    // ✅ Successfully added
+                    // ✅ Update cart count
                     document.querySelector('.js-count-items').innerHTML = response.data?.cart?.quantity;
+
+                    // ✅ Show clear cart button
+                    document.querySelector('.js-clear-cart-button')?.classList.remove('d-none');
+
+                    // ✅ Show toast
                     toastr.clear();
                     toastr.success(response.data?.message);
                 })
@@ -85,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     });
+
 
     document.querySelector('.js-show-modal').addEventListener('click', (e) => {
         e.preventDefault();

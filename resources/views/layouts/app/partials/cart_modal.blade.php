@@ -11,9 +11,14 @@
             </div>
 
             <div class="modal-footer">
+                @php
+                    $cart = session('cart', ['items' => []]);
+                    $isEmpty = empty($cart['items']);
+                @endphp
+
                 <button 
                     type="button" 
-                    class="btn btn-danger ripple js-clear-cart-button"
+                    class="btn btn-danger ripple js-clear-cart-button {{ $isEmpty ? 'd-none' : '' }}"
                     onclick="clearCart()"
                 >
                     {{ __('cart.clear_cart') }}
