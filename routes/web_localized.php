@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Product;
@@ -24,6 +25,9 @@ Route::get('/products', function () {
 
     return view('products', compact('products'));
 })->name('home');
+
+Route::get('/products/{slug}', [ProductController::class, 'show'])->name('product.show');
+
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/modal', [CartController::class, 'modal'])->name('cart.modal');
