@@ -9,6 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $with = ['gallery'];
+
     public static function getById($id)
     {
         return self::with('description')->find($id);
@@ -72,10 +74,14 @@ class Product extends Model
         session()->put('cart', $cart);
     }
 
-
     public function description()
     {
         return $this->hasOne(ProductDescription::class, 'product_id')
             ->where('language_id', app()->getLocaleId());
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany(ProductGallery::class);
     }
 }

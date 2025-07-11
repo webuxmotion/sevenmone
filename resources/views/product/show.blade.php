@@ -34,15 +34,26 @@
                 <li>
                     <i class="fas fa-hand-holding-usd"></i>
                     <span class="product-price">
-                        <small>$250.00</small> $230.99
+                        <small>${{ $product->old_price }}</small> ${{ $product->price }}
                     </span>
                 </li>
             </ul>
 
-            <div id="product">
+            <div id="product" class="js-add-to-cart-wrapper">
                 <div class="input-group mb-3">
-                    <input id="input-quantity" type="text" class="form-control" name="quantity" value="1">
-                    <button class="btn btn-danger" type="button" id="button-addon2">Buy</button>
+                    <input 
+                        id="input-quantity" 
+                        type="text" 
+                        class="form-control js-add-to-cart-count" 
+                        name="quantity" 
+                        value="1"
+                    >
+                    <button 
+                        class="btn btn-danger js-add-to-cart" 
+                        data-id="{{$product->id}}"
+                        type="button" 
+                        id="button-addon2"
+                    >{{ __('messages.buy') }}</button>
                 </div>
             </div>
 
@@ -52,15 +63,15 @@
             
             <ul class="thumbnails list-unstyled clearfix">
                 <li class="thumb-main text-center">
-                    <a class="thumbnail" href="img/products/apple_cinema_30.jpg" data-effect="mfp-zoom-in">
-                        <img src="img/products/imac_1.jpg" alt="">
+                    <a class="thumbnail" href="{{$product->img}}" data-effect="mfp-zoom-in">
+                        <img src="{{$product->img}}" alt="">
                     </a>
                 </li>
 
-                <li class="thumb-additional"><a class="thumbnail" href="img/products/1.jpg" data-effect="mfp-zoom-in"><img src="img/products/1.jpg" alt=""></a></li>
-                <li class="thumb-additional"><a class="thumbnail" href="img/products/2.jpg" data-effect="mfp-zoom-in"><img src="img/products/2.jpg" alt=""></a></li>
-                <li class="thumb-additional"><a class="thumbnail" href="img/products/3.jpg" data-effect="mfp-zoom-in"><img src="img/products/3.jpg" alt=""></a></li>
-                <li class="thumb-additional"><a class="thumbnail" href="img/products/4.jpg" data-effect="mfp-zoom-in"><img src="img/products/4.jpg" alt=""></a></li>
+                @foreach ($product->gallery as $image)
+                    <li class="thumb-additional"><a class="thumbnail" href="{{ $image->img }}" data-effect="mfp-zoom-in"><img src="{{ $image->img }}" alt=""></a></li>
+                @endforeach
+
             </ul>
 
             <p>

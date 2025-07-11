@@ -74,8 +74,16 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
 
             const productId = this.dataset.id;
+            let quantity = 1;
 
-            axios.post(localized_url('/cart/add'), { id: productId, quantity: 1 })
+            const wrapper = button.closest('.js-add-to-cart-wrapper');
+            if (wrapper) {
+                const input = wrapper.querySelector('.js-add-to-cart-count');
+                quantity = input ? parseInt(input.value) || 1 : 1;
+            }
+            
+
+            axios.post(localized_url('/cart/add'), { id: productId, quantity })
                 .then(response => {
                     // ✅ Update cart count
                     document.querySelector('.js-count-items').innerHTML = response.data?.cart?.quantity;

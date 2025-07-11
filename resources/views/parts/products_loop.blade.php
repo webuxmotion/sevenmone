@@ -11,7 +11,7 @@
                 <div class="product-price"><small>${{ $product->old_price }}</small>${{ $product->price }}</div>
                 <div class="product-links">
                     <a 
-                        class="js-add-to-cart" 
+                        class="js-add-to-cart"
                         href="{{ localized_url("/cart/add?id=$product->id") }}"
                         data-id="{{$product->id}}"
                     >
