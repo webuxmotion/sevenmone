@@ -4,21 +4,7 @@
 
 @section('content')
 
-<div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-light p-2">
-            <li class="breadcrumb-item">
-                <a href="{{ route('home') }}"><i class="fas fa-home"></i></a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="#">Laptops</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                {{ $product->description->title }}
-            </li>
-        </ol>
-    </nav>
-</div>
+<x-breadcrumbs :title="$product->description->title" />
 
 <div class="container py-3">
     <div class="row">
