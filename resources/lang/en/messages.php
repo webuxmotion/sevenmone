@@ -5,4 +5,5 @@ return [
     'back_home' => 'Go to Homepage',
     'main_page' => 'Sevenmone – Main Page',
     'buy' => 'Buy',
+    'category_products' => 'Category Products',
 ];

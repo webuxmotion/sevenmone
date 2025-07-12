@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $with = ['gallery'];
+    protected $with = ['gallery', 'description'];
 
     public static function getById($id)
     {

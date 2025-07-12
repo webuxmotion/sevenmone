@@ -20,7 +20,7 @@ if (Schema::hasTable('languages')) {
 
                 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
                 Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-                Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+                Route::post(uri: '/cart/clear', action: [CartController::class, 'clear'])->name('cart.clear');
             });
 
         // The routes for base language can also work without lang code in url

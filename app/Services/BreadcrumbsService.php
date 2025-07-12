@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Product;
 
 class BreadcrumbsService
@@ -13,18 +14,47 @@ class BreadcrumbsService
         $segments = request()->segments();
 
         // Adjust for optional language prefix like /uk
-        $productsIndex = in_array('products', $segments) ? array_search('products', $segments) : -1;
+        $productsIndex = in_array('products', haystack: $segments) ? array_search('products', $segments) : -1;
 
         // Check: if next segment after 'products' is slug and it is the last segment
         if ($productsIndex !== -1 && isset($segments[$productsIndex + 1]) && count($segments) === $productsIndex + 2) {
             $slug = $segments[$productsIndex + 1];
-            $breadcrumbs = array_merge($breadcrumbs, self::getProductBreadcrumbs($slug));
+            $breadcrumbs = array_merge($breadcrumbs, self::forProduct($slug));
+        }
+
+        // ✅ Handle category breadcrumbs
+        $categoryIndex = array_search('category', $segments);
+
+        if ($categoryIndex !== false && isset($segments[$categoryIndex + 1])) {
+            $slug = $segments[$categoryIndex + 1];
+            $category = Category::where('slug', $slug)->first();
+
+            if ($category) {
+                $breadcrumbs = array_merge($breadcrumbs, self::forCategory($category));
+            }
         }
 
         return $breadcrumbs;
     }
 
-    protected static function getProductBreadcrumbs(string $slug): array
+    public static function forCategory(Category $category): array
+    {
+        $breadcrumbs = [];
+
+        while ($category) {
+            $breadcrumbs[] = [
+                'label' => $category->description->title ?? $category->title ?? 'Unnamed',
+                'url' => localized_url("/category/$category->slug"),
+            ];
+
+            // ⚠️ No relationship — fetch parent manually
+            $category = Category::find($category->parent_id);
+        }
+
+        return array_reverse($breadcrumbs);
+    }
+
+    protected static function forProduct(string $slug): array
     {
         $breadcrumbs = [];
 
