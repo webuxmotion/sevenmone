@@ -37,6 +37,7 @@ class LangSwitcher extends Component
     public function getUrlForLocale(string $locale): string
     {
         $currentUri = request()->path(); // Поточний URI, наприклад 'en/products' або 'products'
+        $queryString = request()->getQueryString();
 
         // Отримуємо всі мовні коди (включно з базовою)
         $allLangCodes = DB::table('languages')
@@ -54,13 +55,19 @@ class LangSwitcher extends Component
             }
         }
 
-        // Якщо обираємо базову мову — повертаємо URI без префікса
-        if ($locale === $this->baseLocale) {
-            return url($currentUri);
+        // Rebuild base URL
+        $localizedPath = $locale === $this->baseLocale
+            ? $currentUri
+            : $locale . ($currentUri ? '/' . $currentUri : '');
+
+        $url = url($localizedPath);
+
+        // Append query string if exists
+        if ($queryString) {
+            $url .= '?' . $queryString;
         }
 
-        // Інакше додаємо префікс мови
-        return url($locale . ($currentUri ? '/' . $currentUri : ''));
+        return $url;
     }
 
     public function render()
