@@ -13,7 +13,7 @@ class ProductDescriptionFactory extends Factory
             'language_id' => 1, // або випадкове з існуючих мов, можна зробити кастомізовано
             'title' => $this->faker->sentence(3),
             'content' => $this->faker->paragraphs(3, true),
-            'exerpt' => $this->faker->sentence(6),
+            'excerpt' => $this->faker->sentence(6),
             'keywords' => $this->faker->words(5, true),
             'description' => $this->faker->sentence(10),
         ];

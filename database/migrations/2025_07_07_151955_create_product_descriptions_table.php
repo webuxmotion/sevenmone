@@ -13,7 +13,7 @@ return new class extends Migration
             $table->unsignedInteger('language_id');
             $table->string('title', 255);
             $table->text('content');
-            $table->string('exerpt', 255);
+            $table->string('excerpt', 255);
             $table->string('keywords', 255)->nullable();
             $table->string('description', 255)->nullable();
 

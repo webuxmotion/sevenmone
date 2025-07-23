@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Product;
@@ -32,3 +33,5 @@ Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categ
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/modal', [CartController::class, 'modal'])->name('cart.modal');
+
+Route::get('/search', [SearchController::class, 'index']);

@@ -8,9 +8,9 @@
                     </a>
                 </div>
                 <div class="col text-end icons">
-                    <form>
+                    <form action="{{ localized_url('/search') }}">
                         <div class="input-group" id="search">
-                            <input type="text" class="form-control" placeholder="Search..." name="s">
+                            <input type="text" class="form-control" placeholder="{{ __('search.search') }}" name="s">
                             <button class="btn close-search" type="button"><i class="fas fa-times"></i></button>
                             <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                         </div>
