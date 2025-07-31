@@ -37,4 +37,25 @@ class WishlistController extends Controller
             'message' => 'Product added to wishlist.',
         ]);
     }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:products,id',
+        ]);
+
+        $productId = $request->id;
+
+        $success = Wishlist::remove($productId);
+
+        if (!$success) {
+            return response()->json([
+                'message' => 'Product not found or cannot be deleted from wishlist.',
+            ], 404);
+        }
+
+        return response()->json([
+            'message' => 'Product deleted from wishlist.',
+        ]);
+    }
 }

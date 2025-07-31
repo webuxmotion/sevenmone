@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -33,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $cart = session('cart', ['quantity' => 0]);
             $view->with('cartCount', $cart['quantity'] ?? 0);
+
+            $wishlistIds = Wishlist::get_wishlist_ids();
+            View::share('wishlistIds', $wishlistIds);
         });
     }
 }

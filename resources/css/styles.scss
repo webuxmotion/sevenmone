@@ -1,0 +1,19 @@
+.wishlist-button {
+    .delete-from-wishlist {
+        display: none;
+    }
+
+    .add-to-wishlist {
+        display: inline-block;
+    }
+
+    &.is-added {
+        .delete-from-wishlist {
+            display: inline-block;
+        }
+
+        .add-to-wishlist {
+            display: none;
+        }
+    }
+}

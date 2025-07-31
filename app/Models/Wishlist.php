@@ -30,12 +30,18 @@ class Wishlist extends Model
     // Remove product ID from wishlist
     public static function remove($productId)
     {
+        if (!Product::find($productId)) {
+            return false;
+        }
+
         $ids = self::get_wishlist_ids();
 
-        // Filter out the product
-        $ids = array_filter($ids, fn($id) => $id != $productId);
-
-        self::saveToCookie(array_values($ids));
+        if (in_array($productId, $ids)) {
+            $ids = array_filter($ids, fn($id) => $id != $productId);
+            self::saveToCookie(array_values($ids));
+        }
+        
+        return true;
     }
 
     // Get all product IDs from wishlist

@@ -18,3 +18,8 @@ if (!function_exists('localized_url')) {
         return url($locale . '/' . ltrim($path, '/'));
     }
 }
+
+function in_wishlist($productId)
+{
+    return in_array($productId, view()->shared('wishlistIds', []));
+}

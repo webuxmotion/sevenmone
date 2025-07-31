@@ -44,3 +44,4 @@ Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 Route::post('/wishlist/add', [WishlistController::class, 'add']);
+Route::post('/wishlist/delete', [WishlistController::class, 'delete']);

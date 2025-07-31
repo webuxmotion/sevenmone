@@ -15,10 +15,21 @@
                         <a class="js-add-to-cart" href="{{ localized_url("/cart/add?id=$product->id") }}"
                             data-id="{{ $product->id }}">
                             <i class="fas fa-shopping-cart"></i></a>
-                        <a class="js-add-to-wishlist" href="{{ localized_url("/wishlist/add?id=$product->id") }}"
-                            data-id="{{ $product->id }}">
-                            <i class="far fa-heart"></i>
-                        </a>
+
+                        <span class="wishlist-button js-wishlist-button {{ in_wishlist($product->id) ? 'is-added' : '' }}">
+
+                            <a class="js-delete-from-wishlist delete-from-wishlist"
+                                href="{{ localized_url("/wishlist/delete?id=$product->id") }}"
+                                data-id="{{ $product->id }}">
+                                <i class="fa fa-heart"></i>
+                            </a>
+                            <a class="js-add-to-wishlist add-to-wishlist"
+                                href="{{ localized_url("/wishlist/add?id=$product->id") }}"
+                                data-id="{{ $product->id }}">
+                                <i class="far fa-heart"></i>
+                            </a>
+
+                        </span>
                     </div>
                 </div>
             </div>

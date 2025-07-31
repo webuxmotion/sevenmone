@@ -124,11 +124,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
             axios.post(localized_url('/wishlist/add'), { id: productId })
                 .then(response => {
+                    button.closest('.js-wishlist-button').classList.add('is-added');
                     toastr.success(response.data?.message);
                 })
                 .catch(error => {
                     console.error('Error adding to wishlist:', error);
                     toastr.error('Failed to add to wishlist.');
+                });
+        });
+    });
+
+    document.querySelectorAll('.js-delete-from-wishlist').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const productId = this.dataset.id;
+
+            axios.post(localized_url('/wishlist/delete'), { id: productId })
+                .then(response => {
+                    button.closest('.js-wishlist-button').classList.remove('is-added');
+                    toastr.success(response.data?.message);
+                })
+                .catch(error => {
+                    console.error('Error deleting from wishlist:', error);
+                    toastr.error('Failed to delete from wishlist.');
                 });
         });
     });
