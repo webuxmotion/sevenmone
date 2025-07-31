@@ -15,7 +15,10 @@
                         <a class="js-add-to-cart" href="{{ localized_url("/cart/add?id=$product->id") }}"
                             data-id="{{ $product->id }}">
                             <i class="fas fa-shopping-cart"></i></a>
-                        <a href="#"><i class="far fa-heart"></i></a>
+                        <a class="js-add-to-wishlist" href="{{ localized_url("/wishlist/add?id=$product->id") }}"
+                            data-id="{{ $product->id }}">
+                            <i class="far fa-heart"></i>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -17,10 +16,6 @@ if (Schema::hasTable('languages')) {
             ->name($language->code . '.')
             ->group(function () {
                 require __DIR__ . '/web_localized.php';
-
-                Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-                Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-                Route::post(uri: '/cart/clear', action: [CartController::class, 'clear'])->name('cart.clear');
             });
 
         // The routes for base language can also work without lang code in url

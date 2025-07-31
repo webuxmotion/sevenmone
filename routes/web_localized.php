@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Product;
@@ -35,3 +36,11 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/modal', [CartController::class, 'modal'])->name('cart.modal');
 
 Route::get('/search', [SearchController::class, 'index']);
+
+Route::get('/wishlist', [WishlistController::class, 'show']);
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+Route::post('/wishlist/add', [WishlistController::class, 'add']);

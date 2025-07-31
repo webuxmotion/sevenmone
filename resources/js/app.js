@@ -115,4 +115,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('failed');
             });
     });
+
+    document.querySelectorAll('.js-add-to-wishlist').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const productId = this.dataset.id;
+
+            axios.post(localized_url('/wishlist/add'), { id: productId })
+                .then(response => {
+                    toastr.success(response.data?.message);
+                })
+                .catch(error => {
+                    console.error('Error adding to wishlist:', error);
+                    toastr.error('Failed to add to wishlist.');
+                });
+        });
+    });
 });

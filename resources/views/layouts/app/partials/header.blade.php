@@ -26,7 +26,7 @@
                     
                     @include('layouts.app.partials.cart_modal')
 
-                    <a href="#"><i class="far fa-heart"></i></a>
+                    <a href="{{ localized_url("/wishlist")}}"><i class="far fa-heart"></i></a>
 
                     <div class="dropdown d-inline-block">
                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
